@@ -1,13 +1,16 @@
 #!/bin/bash
 
-echo "Starting 3x-ui Panel..."
+# 3x-ui service ကို စတင်မယ်
 /usr/local/x-ui/x-ui &
 
-echo "Starting Cloudflare Tunnel..."
-# TUNNEL_TOKEN ကို Railway Variables ထဲမှာ ထည့်ထားဖို့ လိုပါတယ်
+echo "Waiting for 3x-ui to start..."
+sleep 5
+
+# Cloudflare Tunnel ကို run မယ်
 if [ -z "$TUNNEL_TOKEN" ]; then
-  echo "ERROR: TUNNEL_TOKEN is not set in Railway Variables!"
+  echo "Error: TUNNEL_TOKEN variable is missing in Railway!"
   exit 1
 fi
 
+echo "Starting Cloudflare Tunnel..."
 cloudflared tunnel --no-autoupdate run --token eyJhIjoiOGQxZmJmOGJjOWM1NmFkOGYyMjZhMGM1MmNlZjgxNzIiLCJ0IjoiYWY4YzMwNWQtOWEwMC00YWEwLWFjNjMtNDVlY2Q2YjkwYjAyIiwicyI6IlpERmlNak0zTXpndE9UWTFOaTAwWm1ZNExXSmlOekl0TmpkalltUmpOV0ZoT1dObCJ9
